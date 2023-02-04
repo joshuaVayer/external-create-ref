@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ChildComponent from "./Components/ChildComponent";
+
+import appRef from './Refs/appRef';
+
+class App extends React.Component {
+  constructor() {
+    super();
+    console.log("[App] appRef.current is not available in constructor", appRef?.current);
+  }
+
+  componentDidMount() {
+    console.log("[App] appRef.current is available on first mount", appRef.current);
+  }
+
+  render() {
+    return (
+      <div ref={appRef} className="app">
+        <h1>Here's an example of using "createRef" inside the component it's defined in.</h1>
+        <ChildComponent />
+      </div>
+    );
+  }
 }
 
 export default App;
